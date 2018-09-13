@@ -12,7 +12,7 @@ f.close()
 
 # readlines()
 for line in f.readlines():
-    print(line.stripp())	#去\n
+    print(line.strip())	#去\n
 
 # read file with IOError
 try:
