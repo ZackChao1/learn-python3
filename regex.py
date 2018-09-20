@@ -127,3 +127,52 @@ def name_of_email(addr):
 assert name_of_email('<Tom Paris> tom@voyager.org') == 'Tom Paris'
 assert name_of_email('tom@voyager.org') == 'tom'
 print('ok')
+
+# kinds of matching
+'''
+    ^(bat|bit|but|hat|hit|hut)      [bh][aiu]
+    \w+\w+
+    \w+,\s\w+
+    [A-Za-z-]+[\w_]+
+    (\w+)*\w*
+    w{3}\.\w+\.(edu|com|net)
+    \d+
+    \d+[1L]
+    \d+(\.\d*)?
+    [-]?\d+(\.\d*)?[+-][-]?\d+(\.\d*)?[Jj]
+    (\w+\.)?\w+@\w+\.\w+
+    (http://)?(w{3}\.)?\w+\.com
+    (\w+)
+    1[012]
+    (\d{4}-\d{6}-\d{5})|(\d{4}-\d{4}-\d{4}-\d{4})
+    
+'''
+# gendata.py
+def check(card):
+    contexts=re.search(r'\d{4}-(\d+)-(\d+)-(\d+)(?:-(\d{4})',card).groups()
+    if not contexts[2] and len(contexts[0])==6 and len(contexts[1])==5:
+        return True
+    elif contexts[2] and len(contexts[0])==4 and len(contexts[1])==4 and len(contexts[2])==4:
+        return True
+    else:
+        return False
+# redata.tex
+def Count(filename):
+        weeks={
+
+        }
+        with open(filename) as f:
+            contexts=f.read()
+            result=re.findall(r'(\w{3})\s\w{3}',contexts)
+            for i in result:
+                weeks[i]=weeks.get(i,0)+1
+
+        return wekks
+# email domain replace
+def Replace(filename,mail):
+    with open(filename) as f:
+        contexts=f.read()
+        replace=re.sub(r'\w*@\w*\.\w{3}',mail,contexts)
+        print(replace)
+
+
