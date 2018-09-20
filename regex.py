@@ -175,4 +175,11 @@ def Replace(filename,mail):
         replace=re.sub(r'\w*@\w*\.\w{3}',mail,contexts)
         print(replace)
 
+# print time
+def print_time(filename):
+    with open(filename) as f:
+        contexts=f.read()
+        time=re.findall(r'\s(\s{3})\s(\d{2}).*(\d{4})',contexts)
+        for t in time:
+            print(','.join(t))
 
