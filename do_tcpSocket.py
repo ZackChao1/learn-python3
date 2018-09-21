@@ -4,9 +4,77 @@
 # socket library
 import socket
 
+'''
+    1、创建客户端socket
+    2、尝试连接服务器
+    3、通信循环
+    4、发送、接收
+    5、关闭客户端socket
+'''
+
+# tsTclint.py
+HOST='127.0.0.1'
+PORT=21567
+BUFSIZ=1024
+ADDR=(HOST,PORT)
+
+tcpCliSock=socket.socket(AF_INET,SOCK_STREAM)
+tcpCliSock.connect(ADDR)
+
+while True:
+    data=input('>')
+    if not data:
+        break
+    tcpCliSock.send(data)
+
+    data=tcpCliSock.recv(BUFSIZ)
+    if not data:
+        break
+    print(data.decode('utf-8'))
+tcpCliSock.close()
+
+
+
+'''
+   1、创建服务器socket
+   2、socket绑定地址
+   3、监听连接
+   4、服务器无限循环
+   5、接受客户端连接
+   6、通信循环
+   7、接收、发送
+   8、关闭客户端socket
+   9、关闭服务端socket
+'''
+
+# tsTserv3.py
+HOST='127.0.0.1'
+PORT=21567
+BUFSIZ=1024
+ADDR=(HOST,PORT)
+
+tcpSerSock=socket.socket(AF_INET,SOCK_STREAM)
+tcpSerSock.bind(ADDR)
+tcpSerSock.listen(5)
+
+while True:
+    print('waiting for connection....')
+    tcpCliSock,addr=tcpSerSock.accept()
+    print('...connected from:',addr)
+
+    while True:
+        data=tcpCliSock.recv(BUFSIZ)
+        if not data:
+            break
+        tcpCliSock.send('[%s] %s' % (bytes(ctime(),'utf-8'),data))
+    tcpCliSock.close()
+tcpSerSock.close()
+
+
+
 # Client创建一个socket
-# AF_INET ipv4协议
-# SOCK_STREAM 面向流的TCP协议
+# AF_INET ipv4协议 socket家族
+# SOCK_STREAM 面向流的TCP协议 socket类型
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # 建立连接
 s.connect(('www.baidu.com', 80))  # argument is a tuple
@@ -33,6 +101,9 @@ header, html = data.split(b'\r\n\r\n', 1)  # 分割一次 本行bytes\r\n\r\n<!D
 print(header.decode('utf-8'))  # byetes to str
 with open(r'E:\Material\2-Development\Python\Python code\learn-python3\baidu.html', 'wb') as f:
     f.write(html)
+
+
+
 
 # Server创建socket
 # IPV4的TCP协议Socket
