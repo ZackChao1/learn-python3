@@ -76,3 +76,6 @@ for data in [b'Michael', b'Tracy', b'Sarah']:
     # 接收数据:
     print(s.recv(1024).decode('utf-8'))
 s.close()
+
+
+
