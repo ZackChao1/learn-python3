@@ -30,5 +30,7 @@ while True:
         option=raw_input('sdfsdf').strip()
         f_option=option,split()
         print(f_option)
+        
+        
 
         
