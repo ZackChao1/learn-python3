@@ -23,8 +23,8 @@ while True:
     ''')
     try:
         option=int(raw_input('-->'))
-    except ValueError
-        print('sdfsf')
+    except ValueError as e:
+        print('sdfsf %d' % e)
         continue
     if option==1:
         option=raw_input('sdfsdf').strip()
